@@ -74,7 +74,7 @@
 
 	export default {
 		name: 'app',
-		components: {Datepicker},
+		components: {Calendar},
 		props: {
 			autoclose: {
 				type: Boolean,
