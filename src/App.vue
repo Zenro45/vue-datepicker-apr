@@ -271,7 +271,7 @@
 					flex: 1;
 					padding: 1rem;
 					font-size: 0.75rem;
-					font-weight: 600;
+					font-weight: 400;
 					text-transform: uppercase;
 				}
 			}
@@ -286,7 +286,7 @@
 					align-items: center;
 					justify-content: center;
 					height: 50px;
-					font-weight: 600;
+					font-weight: 400;
 
 					&.active {
 						color: #34b4f5;
@@ -339,7 +339,7 @@
 				align-content: center;
 				justify-content: center;
 				background-color: #f3f4f5;
-				font-weight: 600;
+				font-weight: 400;
 				color: #293f4d;
 
 				.day-name {

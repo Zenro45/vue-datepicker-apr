@@ -115,7 +115,8 @@
 
 	.month {
 		.month-name {
-			font-weight: bold;
+			text-align: center;
+			font-weight: 400;
 			padding-top: 15px;
 			margin-bottom: 5px;
 		}

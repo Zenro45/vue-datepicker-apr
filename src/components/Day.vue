@@ -150,7 +150,7 @@
 		justify-content: center;
 		height: calc(100vw/7);
 		width: calc(100vw/7);
-		font-weight: 600;
+		font-weight: 400;
 		line-height: 43px;
 		text-align: center;
 		cursor: pointer;
