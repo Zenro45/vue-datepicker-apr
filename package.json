@@ -1,0 +1,17 @@
+{
+  "name": "vue-datepicker-apr",
+  "version": "1.0.0",
+  "description": "A dynamic infinite calendar component in Vue 2",
+  "author": "Jordan Shaw",
+  "license": "MIT",
+  "main": "index.js",
+  "keywords": [
+    "datepicker",
+    "calendar"
+  ],
+  "devDependencies": {
+    "vue": "^2.5.17",
+    "bootstrap": "^4.1.0",
+    "buefy": "^0.4.6"
+  }
+}
