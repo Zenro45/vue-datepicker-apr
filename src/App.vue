@@ -62,7 +62,7 @@
 
 				</div>
 				<div class="modal-footer" v-if="!autoclose && !singleDate && date1 && date2 || !autoclose && singleDate && date1">
-					<button class="btn btn-primary btn-block text-uppercase font-weight-bold p-3" @click="closeModal()">Apply</button>
+					<button type="button" class="btn btn-primary btn-block text-uppercase font-weight-bold p-3" @click="applyModal()">Apply</button>
 				</div>
 			</div>
 		</div>
@@ -73,7 +73,7 @@
 	import Calendar from './components/Calendar.vue'
 
 	export default {
-		name: 'app',
+		name: 'Datepicker',
 		components: {Calendar},
 		props: {
 			autoclose: {
@@ -139,10 +139,10 @@
 		},
 		data() {
 			return {
-				date1: null,
-				dateISO1: null,
-				date2: null,
-				dateISO2: null,
+				date1: this.$parent.date1,
+				dateISO1: this.$parent.dateISO1,
+				date2: this.$parent.date2,
+				dateISO2: this.$parent.dateISO2,
 
 				activeDate: 'date1',
 			}
@@ -196,13 +196,31 @@
 		},
 		methods: {
 			openModal(activeDate = 'date1') {
+				this.date1 = this.$parent.dates.date1,
+				this.dateISO1 = this.$parent.dates.dateISO1,
+				this.date2 = this.$parent.dates.date2,
+				this.dateISO2 = this.$parent.dates.dateISO2,
+
 				this.activeDate = activeDate
+
+				this.$root.$emit('clearSelected')
+				this.$root.$emit('sessionDates', { dateISO1: this.dateISO1, dateISO2: this.dateISO2 })
+
 				$('#datepicker').modal('show')
 			},
 
 			closeModal() {
-				this.$emit('update:dates', {date1: this.date1, date2: this.date2})
 				$('#datepicker').modal('hide')
+			},
+
+			applyModal() {
+				this.$parent.dates = {
+					date1: this.date1,
+					dateISO1: this.dateISO1,
+					date2: this.date2,
+					dateISO2: this.dateISO2,
+				}
+				this.closeModal()
 			},
 
 			setActiveDate(date) {
@@ -224,7 +242,7 @@
 
 <style lang="scss" scoped>
 	#datepicker {
-		z-index: 1041;
+		z-index: 1051;
 
 		.modal-dialog {
 			&, .modal-content {
@@ -236,9 +254,12 @@
 
 		.modal-header {
 			display: block;
+			height: auto;
 			padding: 0;
 			border-bottom: 0;
+			background: white;
 			box-shadow: 0px 5px 5px 0 #ccc;
+			color: initial;
 			z-index: 1;
 
 			.modal-actions {
@@ -247,9 +268,11 @@
 				justify-content: space-between;
 
 				.close {
+					position: static;
 					flex: 1;
 					margin-left: 0;
 					text-align: left;
+					color: initial;
 
 					&:focus {
 						outline: 0;

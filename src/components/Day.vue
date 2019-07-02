@@ -85,9 +85,10 @@
 			},
 
 			isBeforeDay(day = this.day) {
-				let today = new Date()
 				if(this.$parent.$parent.$parent.$parent.dateISO2 && !this.$parent.$parent.$parent.$parent.dateISO1) {
-					return day.getDate() > new Date(this.$parent.$parent.$parent.$parent.dateISO2).getDate()
+					let selectedDay = new Date(this.$parent.$parent.$parent.$parent.dateISO2)
+					return (day.getMonth() >= selectedDay.getMonth() &&
+						day.getDate() > selectedDay.getDate())
 				}
 			},
 
@@ -119,6 +120,21 @@
 		computed: {},
 		mounted() {
 			this.selected = this.isSelected
+
+			this.$root.$on('sessionDates', (dates) => {
+
+				if( this.day.getFullYear() === new Date(dates.dateISO1).getFullYear() &&
+					this.day.getMonth() === new Date(dates.dateISO1).getMonth() &&
+					this.day.getDate() === new Date(dates.dateISO1).getDate() ) {
+					this.selected = true
+				}
+
+				if( this.day.getFullYear() === new Date(dates.dateISO2).getFullYear() &&
+					this.day.getMonth() === new Date(dates.dateISO2).getMonth() &&
+					this.day.getDate() === new Date(dates.dateISO2).getDate() ) {
+					this.selected = true
+				}
+			})
 
 			this.$root.$on('clearSelected', () => {
 				$('#datepickerModal .is-between').removeClass('is-between')
@@ -181,7 +197,11 @@
 		border-radius: 5px;
 		background-color: #34b4f5;
 		color: white;
-
+		& + .day.is-selected{
+			border-radius: 5px;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
 	}
 
 	.day.disabled {
