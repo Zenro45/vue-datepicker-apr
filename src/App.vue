@@ -1,6 +1,6 @@
 <template>
 	<!-- Inputs to Open Modal -->
-	<div id="datepicker" class="modal fade" tabindex="-1" role="dialog">
+	<div :id="'datepicker_' + variable" class="modal fade" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -76,6 +76,12 @@
 		name: 'Datepicker',
 		components: {Calendar},
 		props: {
+			variable: {
+				type: String,
+				default() {
+					return 'date'
+				}
+			},
 			autoclose: {
 				type: Boolean,
 				default() {
@@ -148,9 +154,8 @@
 			}
 		},
 		mounted() {
-			this.$root.$on('date1', (date) => {
+			this.$root.$on(this.variable + '_date1', (date) => {
 				if (date) {
-
 					// Set Date
 					this.dateISO1 = date
 					this.date1 = date.toDateString();
@@ -158,7 +163,7 @@
 					// If auto-close and single dates is true, close modal. Otherwise, set date 2 to active.
 					if (this.autoclose && this.singleDate) {
 						setTimeout(() => {
-							this.closeModal();
+							this.applyModal();
 						}, 300)
 					} else {
 						this.activeDate = 'date2';
@@ -166,7 +171,7 @@
 				}
 			});
 
-			this.$root.$on('date2', (date) => {
+			this.$root.$on(this.variable + '_date2', (date) => {
 				if (date) {
 
 					// Set Date
@@ -176,7 +181,7 @@
 					// If auto-close is true, close modal on date 2 selection.
 					if (this.autoclose) {
 						setTimeout(() => {
-							this.closeModal();
+							this.applyModal();
 						}, 300)
 					}
 
@@ -196,21 +201,23 @@
 		},
 		methods: {
 			openModal(activeDate = 'date1') {
-				this.date1 = this.$parent.dates.date1,
-				this.dateISO1 = this.$parent.dates.dateISO1,
-				this.date2 = this.$parent.dates.date2,
-				this.dateISO2 = this.$parent.dates.dateISO2,
+				this.date1 = this.$parent.dates.date1
+				this.dateISO1 = this.$parent.dates.dateISO1
+				if(!this.singleDate) {
+					this.date2 = this.$parent.dates.date2
+					this.dateISO2 = this.$parent.dates.dateISO2
+				}
 
 				this.activeDate = activeDate
 
-				this.$root.$emit('clearSelected')
-				this.$root.$emit('sessionDates', { dateISO1: this.dateISO1, dateISO2: this.dateISO2 })
+				this.$root.$emit(this.variable + '_clearSelected')
+				this.$root.$emit(this.variable + '_sessionDates', { dateISO1: this.dateISO1, dateISO2: this.dateISO2 })
 
-				$('#datepicker').modal('show')
+				$('#datepicker_' + this.variable).modal('show')
 			},
 
 			closeModal() {
-				$('#datepicker').modal('hide')
+				$('#datepicker_' + this.variable).modal('hide')
 			},
 
 			applyModal() {
@@ -233,7 +240,7 @@
 				this.dateISO1 = null;
 				this.dateISO2 = null;
 				this.activeDate = 'date1'
-				this.$root.$emit('clearSelected')
+				this.$root.$emit(this.variable + '_clearSelected')
 			}
 		}
 	}
@@ -241,7 +248,7 @@
 
 
 <style lang="scss" scoped>
-	#datepicker {
+	.modal {
 		z-index: 1051;
 
 		.modal-dialog {
@@ -288,6 +295,8 @@
 					min-height: 50px;
 					margin: 0;
 					font-size: 1rem;
+					font-weight: 500;
+					text-align: center;
 				}
 
 				.clear {

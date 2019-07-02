@@ -4,6 +4,7 @@
 			'is-today': isToday(day),
 			'is-between': isBetweenDates(day),
 			'is-selected': selected,
+			'rounded': selected && $parent.$parent.$parent.$parent.singleDate,
 			'disabled': isBeforeToday(day) || isAfterDaysOfSelection(day),
 			'hide': isNotMonth(day)
 		}"
@@ -16,6 +17,7 @@
 	export default {
 		methods: {
 			handleClick(day) {
+
 				if (!this.isBeforeToday(day)) {
 
 					// If date is after final date throw an alert
@@ -30,30 +32,30 @@
 
 					// Check to see which date is active
 					if (this.$parent.$parent.$parent.$parent.activeDate === 'date1'
-						|| $('#datepicker .is-selected').length >= 2
+						|| $('#datepicker_' + this.variable + ' .is-selected').length >= 2
 						|| (this.$parent.$parent.$parent.$parent.activeDate === 'date1' && this.isBeforeDay(this.$parent.$parent.$parent.$parent.dateISO2))) {
 
 						// If date 1 exists null out date2 else set date 1
 						if (this.$parent.$parent.$parent.$parent.date1) {
-							this.$root.$emit('clearSelected')
-							this.$root.$emit('date1', day);
-							this.$root.$emit('date2', null);
+							this.$root.$emit(this.variable + '_clearSelected')
+							this.$root.$emit(this.variable + '_date1', day);
+							this.$root.$emit(this.variable + '_date2', null);
 						} else {
-							this.$root.$emit('date1', day);
+							this.$root.$emit(this.variable + '_date1', day);
 						}
 
 					} else if (this.$parent.$parent.$parent.$parent.activeDate === 'date2') {
 
 						if (this.$parent.$parent.$parent.$parent.singleDate) {
-							this.$root.$emit('clearSelected')
-							this.$root.$emit('date1', day);
+							this.$root.$emit(this.variable + '_clearSelected')
+							this.$root.$emit(this.variable + '_date1', day);
 
 							// If date 2 is before date 1, set date 1 instead.
 						} else if (new Date(this.$parent.$parent.$parent.$parent.dateISO1).getTime() < new Date(day).getTime()) {
-							this.$root.$emit('date2', day);
+							this.$root.$emit(this.variable + '_date2', day);
 						} else {
-							this.$root.$emit('clearSelected')
-							this.$root.$emit('date1', day);
+							this.$root.$emit(this.variable + '_clearSelected')
+							this.$root.$emit(this.variable + '_date1', day);
 						}
 
 					}
@@ -119,31 +121,31 @@
 		},
 		computed: {},
 		mounted() {
-			this.selected = this.isSelected
-
-			this.$root.$on('sessionDates', (dates) => {
+			this.$root.$on(this.variable + '_sessionDates', (dates) => {
 
 				if( this.day.getFullYear() === new Date(dates.dateISO1).getFullYear() &&
 					this.day.getMonth() === new Date(dates.dateISO1).getMonth() &&
 					this.day.getDate() === new Date(dates.dateISO1).getDate() ) {
 					this.selected = true
 				}
-
-				if( this.day.getFullYear() === new Date(dates.dateISO2).getFullYear() &&
-					this.day.getMonth() === new Date(dates.dateISO2).getMonth() &&
-					this.day.getDate() === new Date(dates.dateISO2).getDate() ) {
-					this.selected = true
+				if(!this.$parent.$parent.$parent.$parent.singleDate) {
+					if (this.day.getFullYear() === new Date(dates.dateISO2).getFullYear() &&
+						this.day.getMonth() === new Date(dates.dateISO2).getMonth() &&
+						this.day.getDate() === new Date(dates.dateISO2).getDate()) {
+						this.selected = true
+					}
 				}
 			})
 
-			this.$root.$on('clearSelected', () => {
+			this.$root.$on(this.variable + '_clearSelected', () => {
 				$('#datepickerModal .is-between').removeClass('is-between')
 				this.selected = false
 			})
 		},
 		data() {
 			return {
-				selected: false
+				selected: false,
+				variable: this.$parent.$parent.$parent.$parent.variable
 			}
 		},
 		props: {
