@@ -51,5 +51,6 @@
 		background: #f3f4f5;
 		font-size: 1.5rem;
 		text-align: center;
+		color: #333;
 	}
 </style>

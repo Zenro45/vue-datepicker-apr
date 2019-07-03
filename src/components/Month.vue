@@ -119,6 +119,7 @@
 			font-weight: 400;
 			padding-top: 15px;
 			margin-bottom: 5px;
+			color: #333;
 		}
 	}
 </style>
