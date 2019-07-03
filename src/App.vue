@@ -277,7 +277,7 @@
 				.close {
 					position: static;
 					flex: 1;
-					margin-left: 0;
+					margin: 0;
 					text-align: left;
 					color: initial;
 
