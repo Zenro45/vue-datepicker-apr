@@ -171,6 +171,7 @@
 		font-weight: 400;
 		line-height: 43px;
 		text-align: center;
+		color: #333;
 		cursor: pointer;
 		transition: 0.125s all ease-in-out;
 		&:not(.is-between) + .day.is-selected{
