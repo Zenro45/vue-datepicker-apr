@@ -256,6 +256,8 @@
 				height: 100vh;
 				margin: 0;
 				padding: 0;
+				border: 0;
+				border-radius: 0;
 			}
 		}
 
@@ -390,10 +392,16 @@
 
 		.modal-body {
 			overflow-y: scroll;
+			padding-bottom: 3rem !important;
 
 			&::-webkit-scrollbar {
 				display: none;
 			}
+		}
+
+		.modal-footer{
+			position: fixed;
+			left: 0; right: 0; bottom: 0;
 		}
 	}
 </style>
