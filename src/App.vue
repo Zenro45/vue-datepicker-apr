@@ -23,7 +23,7 @@
 					</div>
 
 					<!-- Display Selected Dates -->
-					<div class="modal-date-selection col-12 p-0">
+					<div class="modal-date-selection col-12 p-0" v-if="!singleDate">
 
 						<!-- Date 1 Selection -->
 						<div class="date-selection-1"
