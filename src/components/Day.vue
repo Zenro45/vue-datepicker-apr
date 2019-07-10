@@ -4,8 +4,9 @@
 			'is-today': isToday(day),
 			'is-between': isBetweenDates(day),
 			'is-selected': selected,
+			'is-preselected': preSelected,
 			'rounded': selected && $parent.$parent.$parent.$parent.singleDate,
-			'disabled': isBeforeToday(day) || isAfterDaysOfSelection(day),
+			'disabled': isBeforeToday(day) || isAfterDaysOfSelection(day) || isBeforeMinDate(day),
 			'hide': isNotMonth(day)
 		}"
 		 @click="handleClick(day)">
@@ -86,8 +87,16 @@
 				)
 			},
 
+			isBeforeMinDate(day = this.day) {
+				let min = this.$parent.$parent.$parent.min
+				if (min) {
+					let date = new Date(min);
+					return (day < date)
+				}
+			},
+
 			isBeforeDay(day = this.day) {
-				if(this.$parent.$parent.$parent.$parent.dateISO2 && !this.$parent.$parent.$parent.$parent.dateISO1) {
+				if(this.$parent.$parent.$parent.$parent.dateISO2 && !this.$parent.$parent.$parent.$parent.dateISO1 && !this.$parent.$parent.$parent.$parent.singleDate) {
 					let selectedDay = new Date(this.$parent.$parent.$parent.$parent.dateISO2)
 					return (day.getMonth() >= selectedDay.getMonth() &&
 						day.getDate() > selectedDay.getDate())
@@ -135,6 +144,17 @@
 						this.selected = true
 					}
 				}
+
+				if(this.$parent.$parent.$parent.min) {
+					let minDate = new Date(this.$parent.$parent.$parent.min);
+					if (this.day.getFullYear() === minDate.getFullYear() &&
+						this.day.getMonth() === minDate.getMonth() &&
+						this.day.getDate() === minDate.getDate() &&
+						this.day.getDate() !== new Date().getDate()
+					) {
+						this.preSelected = true
+					}
+				}
 			})
 
 			this.$root.$on(this.variable + '_clearSelected', () => {
@@ -144,7 +164,9 @@
 		},
 		data() {
 			return {
+				parent: null,
 				selected: false,
+				preSelected: false,
 				variable: this.$parent.$parent.$parent.$parent.variable
 			}
 		},
@@ -205,6 +227,11 @@
 			border-top-left-radius: 0;
 			border-bottom-left-radius: 0;
 		}
+	}
+
+	.day.is-preselected {
+		border-radius: 5px;
+		background-color: #dddddd;
 	}
 
 	.day.disabled {
