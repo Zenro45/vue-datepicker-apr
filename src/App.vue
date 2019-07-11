@@ -121,7 +121,7 @@
 			maxDate: {
 				type: Date,
 				default() {
-					return new Date(new Date().setFullYear(new Date().getFullYear() + 2))
+					return new Date(new Date().setFullYear(new Date().getFullYear() + 5))
 				}
 			},
 			maxDatesBetween: {
