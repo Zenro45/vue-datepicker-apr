@@ -133,20 +133,24 @@
 			},
 			scrollToMonth(year, month) {
 				const headerHeight = this.headerHeight
-				const offset = this.$el.querySelector(`.month[data-month="${month}"][data-year="${year}"]`).offsetTop
-				this.$el.querySelector('.calendar-container').scrollTop = offset - headerHeight
+				if(this.$el.querySelector(`.month[data-month="${month}"][data-year="${year}"]`)) {
+					const offset = this.$el.querySelector(`.month[data-month="${month}"][data-year="${year}"]`).offsetTop
+					this.$el.querySelector('.calendar-container').scrollTop = offset - headerHeight
+				}
 			},
 			handleScroll(e) {
 				const headerHeight = this.headerHeight
-				const scrollTop = this.$el.querySelector('.calendar-container').scrollTop
-				const years = this.$el.querySelectorAll('.year')
-				for (let i = 0; i < years.length; i++) {
-					const year = years[i]
-					if (scrollTop <= year.offsetTop - (headerHeight - 10)) {
-						if (i !== 0) {
-							this.currentYear = Number(year.innerHTML) - 1
+				if(this.$el.querySelector('.calendar-container')) {
+					const scrollTop = this.$el.querySelector('.calendar-container').scrollTop
+					const years = this.$el.querySelectorAll('.year')
+					for (let i = 0; i < years.length; i++) {
+						const year = years[i]
+						if (scrollTop <= year.offsetTop - (headerHeight - 10)) {
+							if (i !== 0) {
+								this.currentYear = Number(year.innerHTML) - 1
+							}
+							return
 						}
-						return
 					}
 				}
 				this.currentYear = this.max.getFullYear()
