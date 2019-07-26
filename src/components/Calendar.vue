@@ -34,7 +34,7 @@
 					weekDays.push(this.dayNames[firstDay])
 					firstDay += 1
 					if (firstDay >= this.dayNames.length) {
-						firstDay = 0
+						firstDay = 1
 					}
 				}
 				return weekDays

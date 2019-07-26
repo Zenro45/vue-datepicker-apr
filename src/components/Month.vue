@@ -22,13 +22,13 @@
 		computed: {
 			weeks() {
 				let monthWeeks = []
-				const firstDate = new Date(this.year, this.month, 1)
-				const lastDate = new Date(this.year, this.month + 1, 1)
+				let firstDate = new Date(this.year, this.month, 1)
+				let lastDate = new Date(this.year, this.month + 1, 0)
 				let currentWeekDay = 0
 				let currentWeek = []
 
 				// Add days from previous month
-				if (this.firstDay !== firstDate.getDay()) {
+				if (this.firstDay !== firstDate.getDay() - 1) {
 					let previousDate = new Date(this.year, this.month, 0)
 					while (previousDate.getDay() !== this.firstDay - 1) {
 						previousDate.setDate(previousDate.getDate() - 1)
@@ -55,6 +55,8 @@
 					currentWeekDay += 1
 					firstDate.setDate(firstDate.getDate() + 1)
 				}
+
+				// Add days of next month (Removed for now)
 				if (currentWeek.length > 0) {
 					// while (currentWeek.length !== 7) {
 					// 	const day = new Date(firstDate.getTime())
