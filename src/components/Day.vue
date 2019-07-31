@@ -6,7 +6,7 @@
 			'is-selected': selected,
 			'is-preselected': preSelected,
 			'rounded': selected && $parent.$parent.$parent.$parent.singleDate,
-			'disabled': isBeforeToday(day) || isAfterDaysOfSelection(day) || isBeforeMinDate(day),
+			'disabled': isBeforeToday(day) || isAfterDaysOfSelection(day) || isBeforeMinDate(day) || isAfterMaxDate(day),
 			'hide': isNotMonth(day)
 		}"
 		 @click="handleClick(day)">
@@ -76,7 +76,7 @@
 			},
 
 			isBeforeToday(day = this.day) {
-				let today = new Date()
+				let today = this.$parent.$parent.$parent.$parent.minDate
 				return (
 					day.getFullYear() === today.getFullYear() &&
 					day.getMonth() === today.getMonth() &&
@@ -92,6 +92,14 @@
 				if (min) {
 					let date = new Date(min);
 					return (day < date)
+				}
+			},
+
+			isAfterMaxDate(day = this.day) {
+				let max = this.$parent.$parent.$parent.max
+				if (max) {
+					let date = new Date(max);
+					return (day > date)
 				}
 			},
 
@@ -152,6 +160,7 @@
 						this.day.getDate() === minDate.getDate() &&
 						this.day.getDate() !== new Date().getDate()
 					) {
+						if(this.$parent.$parent.$parent.preSelectMin)
 						this.preSelected = true
 					}
 				}

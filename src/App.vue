@@ -112,6 +112,12 @@
 					return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 				}
 			},
+			preSelectMin: {
+				type: Boolean,
+				default() {
+					return true
+				}
+			},
 			minDate: {
 				type: Date,
 				default() {

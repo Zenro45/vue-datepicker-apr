@@ -23,7 +23,7 @@
 			weeks() {
 				let monthWeeks = []
 				let firstDate = new Date(this.year, this.month, 1)
-				let lastDate = new Date(this.year, this.month + 1, 0)
+				let lastDate = new Date(this.year, this.month + 1, 1)
 				let currentWeekDay = 0
 				let currentWeek = []
 
