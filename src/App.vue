@@ -58,7 +58,7 @@
 				<div class="modal-body p-0">
 
 					<!-- Calendar List -->
-					<calendar :dayNames="dayNames" :min="minDate" :max="maxDate" width="auto" height="auto"></calendar>
+					<calendar ref="calendar" :dayNames="dayNames" :min="minDate" :max="maxDate" width="auto" height="auto"></calendar>
 
 				</div>
 				<div class="modal-footer" v-if="!autoclose && !singleDate && date1 && date2 || !autoclose && singleDate && date1">
@@ -160,6 +160,7 @@
 			}
 		},
 		mounted() {
+			console.log(this.$parent.date1)
 			this.$root.$on(this.variable + '_date1', (date) => {
 				if (date) {
 					// Set Date
@@ -209,6 +210,7 @@
 			openModal(activeDate = 'date1') {
 				this.date1 = this.$parent.dates.date1
 				this.dateISO1 = this.$parent.dates.dateISO1
+				this.$refs.calendar.scrollToDate(new Date(this.dateISO1))
 				if(!this.singleDate) {
 					this.date2 = this.$parent.dates.date2
 					this.dateISO2 = this.$parent.dates.dateISO2

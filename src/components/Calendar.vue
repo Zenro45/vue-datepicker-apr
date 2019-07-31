@@ -67,7 +67,7 @@
 			})
 		},
 		mounted() {
-			this.scrollToDate(new Date())
+			this.scrollToDate(this.min)
 		},
 		props: {
 			selected: {
@@ -134,8 +134,11 @@
 			scrollToMonth(year, month) {
 				const headerHeight = this.headerHeight
 				if(this.$el.querySelector(`.month[data-month="${month}"][data-year="${year}"]`)) {
-					const offset = this.$el.querySelector(`.month[data-month="${month}"][data-year="${year}"]`).offsetTop
-					this.$el.querySelector('.calendar-container').scrollTop = offset - headerHeight
+					setTimeout(() => {
+						const offset = this.$el.querySelector(`.month[data-month="${month}"][data-year="${year}"]`).offsetTop
+						$(".modal-body").animate({ scrollTop: offset - headerHeight }, "slow");
+						// this.$el.querySelector('.calendar-container').scrollTop = offset - headerHeight
+					}, 500)
 				}
 			},
 			handleScroll(e) {
@@ -165,6 +168,7 @@
 	}
 
 	.calendar-container {
+		position:relative;
 		overflow: scroll;
 		margin: 0 auto;
 		padding-bottom: 5rem;

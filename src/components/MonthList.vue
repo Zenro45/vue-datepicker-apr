@@ -41,6 +41,9 @@
 	}
 </script>
 <style lang="scss">
+	.month-list{
+		position: relative;
+	}
 	.month-list .year:first-child {
 		display: none;
 	}

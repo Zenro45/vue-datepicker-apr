@@ -116,6 +116,7 @@
 	}
 
 	.month {
+		position: relative;
 		.month-name {
 			text-align: center;
 			font-weight: 400;
