@@ -26,9 +26,15 @@
 				let lastDate = new Date(this.year, this.month + 1, 1)
 				let currentWeekDay = 0
 				let currentWeek = []
+				let adjustDays = 2
+
+				// Adjust days for specific months that start on a Wednesday.
+				if(new Date(this.year, this.month, 1).getDay() === 3){
+					adjustDays = 1
+				}
 
 				// Add days from previous month
-				if (this.firstDay !== firstDate.getDay() - 1) {
+				if (this.firstDay !== firstDate.getDay() - adjustDays) {
 					let previousDate = new Date(this.year, this.month, 0)
 					while (previousDate.getDay() !== this.firstDay - 1) {
 						previousDate.setDate(previousDate.getDate() - 1)
