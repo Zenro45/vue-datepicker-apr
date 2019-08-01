@@ -160,7 +160,6 @@
 			}
 		},
 		mounted() {
-			console.log(this.$parent.date1)
 			this.$root.$on(this.variable + '_date1', (date) => {
 				if (date) {
 					// Set Date
