@@ -135,9 +135,10 @@
 				const headerHeight = this.headerHeight
 				if(this.$el.querySelector(`.month[data-month="${month}"][data-year="${year}"]`)) {
 					setTimeout(() => {
-						const offset = this.$el.querySelector(`.month[data-month="${month}"][data-year="${year}"]`).offsetTop
-						$(".modal-body").animate({ scrollTop: offset - headerHeight }, "slow");
-						// this.$el.querySelector('.calendar-container').scrollTop = offset - headerHeight
+						if(this.$el) {
+							const offset = this.$el.querySelector(`.month[data-month="${month}"][data-year="${year}"]`).offsetTop
+							$(".modal-body").animate({scrollTop: offset - headerHeight}, "slow");
+						}
 					}, 500)
 				}
 			},
