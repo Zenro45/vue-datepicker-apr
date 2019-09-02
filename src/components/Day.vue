@@ -91,6 +91,7 @@
 				let min = this.$parent.$parent.$parent.min
 				if (min) {
 					let date = new Date(min);
+					date.setDate(date.getDate() - 1);
 					return (day < date)
 				}
 			},
