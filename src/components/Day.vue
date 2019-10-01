@@ -114,10 +114,13 @@
 
 			isNotMonth(day = this.day) {
 				let today = new Date()
-				return (
-					day.getFullYear() === today.getFullYear() &&
-					day.getMonth() < today.getMonth()
-				)
+				let min = new Date(this.$parent.$parent.$parent.min)
+				if (min >= today){
+					return (
+						day.getFullYear() === today.getFullYear() &&
+						day.getMonth() < today.getMonth()
+					)
+				}
 			},
 
 			isAfterDaysOfSelection(day) {

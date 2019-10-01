@@ -13,5 +13,17 @@
     "bootstrap": "^4.1.0",
     "buefy": "^0.4.6",
     "vue": "^2.5.17"
-  }
+  },
+  "dependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zenro45/vue-datepicker-apr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Zenro45/vue-datepicker-apr/issues"
+  },
+  "homepage": "https://github.com/Zenro45/vue-datepicker-apr#readme"
 }
