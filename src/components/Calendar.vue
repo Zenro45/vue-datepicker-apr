@@ -142,7 +142,7 @@
 					}, 500)
 				}
 			},
-			handleScroll(e) {
+			handleScroll() {
 				const headerHeight = this.headerHeight
 				if(this.$el.querySelector('.calendar-container')) {
 					const scrollTop = this.$el.querySelector('.calendar-container').scrollTop
@@ -162,54 +162,3 @@
 		}
 	}
 </script>
-
-<style lang="scss">
-	.vue-infinite-calendar {
-		position: relative;
-	}
-
-	.calendar-container {
-		position:relative;
-		overflow: scroll;
-		margin: 0 auto;
-		padding-bottom: 5rem;
-		-webkit-overflow-scrolling: touch;
-		box-shadow: inset 0px 10px 10px -10px #CCC, inset 0px -10px 10px -10px #CCC;
-	}
-
-	.week-names {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-
-		.day-name {
-			flex: 1;
-		}
-	}
-
-	.calendar-header {
-		background-color: white;
-		width: inherit;
-		margin: 0 auto;
-
-		.current-year {
-			font-size: 1.5rem;
-		}
-
-		.today-button {
-			float: right;
-			text-decoration: none;
-		}
-
-		.week-days {
-			width: 100%;
-			margin-bottom: 5px;
-
-			.week-day {
-				display: inline-block;
-				width: 14.28571%;
-				text-align: center;
-			}
-		}
-	}
-</style>

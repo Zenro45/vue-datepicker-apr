@@ -41,7 +41,7 @@
 					}
 					while (previousDate.getTime() !== firstDate.getTime()) {
 						const day = new Date(previousDate.getTime())
-						if(previousDate.getTime() == day) {
+						if(previousDate.getTime() === day) {
 							currentWeek.push(day)
 						}
 						currentWeekDay += 1
@@ -105,30 +105,3 @@
 		}
 	}
 </script>
-
-<style lang="scss">
-	.week {
-		display: flex;
-		justify-content: flex-end;
-		width: 100%;
-
-		& .day.is-selected:only-of-type{
-			background-color: #333;
-		}
-
-		&:last-child{
-			justify-content: flex-start;
-		}
-	}
-
-	.month {
-		position: relative;
-		.month-name {
-			text-align: center;
-			font-weight: 400;
-			padding-top: 15px;
-			margin-bottom: 5px;
-			color: #333;
-		}
-	}
-</style>

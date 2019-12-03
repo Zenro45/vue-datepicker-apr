@@ -1,6 +1,6 @@
 <template>
 	<!-- Inputs to Open Modal -->
-	<div :id="'datepicker_' + variable" class="modal fade" tabindex="-1" role="dialog">
+	<div :id="'datepicker_' + variable" class="datepicker-modal modal fade" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -10,7 +10,7 @@
 
 						<!-- Close Button -->
 						<button type="button" class="close" @click.prevent="closeModal()" v-if="showClose">
-							<svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="15" class="svg-inline--fa fa-times">
+							<svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="15" class="svg-inline--fa fa-times">
 								<path fill="currentColor" d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z" class=""></path>
 							</svg>
 						</button>
@@ -34,7 +34,7 @@
 
 						<!-- Arrow between selections -->
 						<div class="arrow" v-if="!singleDate">
-							<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" class="svg-inline--fa fa-arrow-right">
+							<svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" class="svg-inline--fa fa-arrow-right">
 								<path fill="currentColor" d="M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z" class=""></path>
 							</svg>
 						</div>
@@ -252,164 +252,3 @@
 		}
 	}
 </script>
-
-
-<style lang="scss" scoped>
-	.modal {
-		z-index: 1051;
-
-		.modal-dialog {
-			&, .modal-content {
-				height: 100vh;
-				margin: 0;
-				padding: 0;
-				border: 0;
-				border-radius: 0;
-			}
-		}
-
-		.modal-header {
-			display: block;
-			height: auto;
-			padding: 0;
-			border-bottom: 0;
-			background: white;
-			box-shadow: 0px 5px 5px 0 #ccc;
-			color: initial;
-			z-index: 1;
-
-			.modal-actions {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-
-				.close {
-					position: static;
-					flex: 1;
-					margin: 0;
-					text-align: left;
-					color: initial;
-
-					&:focus {
-						outline: 0;
-						box-shadow: none;
-					}
-				}
-
-				.title {
-					flex: 6;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					min-height: 50px;
-					margin: 0;
-					font-size: 1rem;
-					font-weight: 500;
-					text-align: center;
-				}
-
-				.clear {
-					flex: 1;
-					padding: 1rem;
-					font-size: 0.75rem;
-					font-weight: 400;
-					text-transform: uppercase;
-				}
-			}
-
-			.modal-date-selection {
-				position: relative;
-				display: flex;
-
-				.date-selection-1, .date-selection-2 {
-					flex: 1;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					height: 50px;
-					font-weight: 400;
-
-					&.active {
-						color: #34b4f5;
-					}
-				}
-
-				.date-selection-2 {
-					position: relative;
-					top: 0;
-					left: 0;
-					right: calc(100% + 50px);
-					width: 100%;
-
-					&.active {
-						right: 0;
-					}
-
-					&::after {
-						content: "";
-						position: absolute;
-						right: inherit;
-						bottom: 0;
-						width: inherit;
-						height: 4px;
-						background: #34b4f5;
-						pointer-events: none;
-						/*transition*/
-						-webkit-transition: all .5s ease;
-						-moz-transition: all .5s ease;
-						-o-transition: all .5s ease;
-						transition: all .5s ease;
-					}
-				}
-
-				.date-selection-1:not(.active) + .arrow + .date-selection-2:not(.active)::after {
-					display: none;
-				}
-
-				.arrow {
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					height: 50px;
-					width: 50px;
-				}
-			}
-
-			.day-names {
-				display: flex;
-				align-content: center;
-				justify-content: center;
-				background-color: #f3f4f5;
-				font-weight: 400;
-				color: #293f4d;
-
-				.day-name {
-					flex: 1;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					height: 50px;
-				}
-			}
-		}
-
-		.modal-content {
-			max-height: initial;
-		}
-
-		.modal-body {
-			overflow-y: scroll;
-			padding-bottom: 3rem !important;
-
-			&::-webkit-scrollbar {
-				display: none;
-			}
-		}
-
-		.modal-footer{
-			position: fixed;
-			left: 0; right: 0; bottom: 0;
-			background-color: white;
-		}
-	}
-</style>

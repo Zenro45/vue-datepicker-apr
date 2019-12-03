@@ -1,0 +1,331 @@
+.datepicker-modal {
+	&.modal {
+		z-index: 1051;
+
+		.modal-dialog {
+			&, .modal-content {
+				height: 100vh;
+				margin: 0;
+				padding: 0;
+				border: 0;
+				border-radius: 0;
+			}
+		}
+
+		.modal-header {
+			display: block;
+			height: auto;
+			padding: 0;
+			border-bottom: 0;
+			background: white;
+			box-shadow: 0 5px 5px 0 #ccc;
+			color: initial;
+			z-index: 1;
+
+			.modal-actions {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+
+				.close {
+					position: static;
+					flex: 1;
+					margin: 0;
+					text-align: left;
+					color: initial;
+
+					&:focus {
+						outline: 0;
+						box-shadow: none;
+					}
+				}
+
+				.title {
+					flex: 6;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					min-height: 50px;
+					margin: 0;
+					font-size: 1rem;
+					font-weight: 500;
+					text-align: center;
+				}
+
+				.clear {
+					flex: 1;
+					padding: 1rem;
+					font-size: 0.75rem;
+					font-weight: 400;
+					text-transform: uppercase;
+				}
+			}
+
+			.modal-date-selection {
+				position: relative;
+				display: flex;
+
+				.date-selection-1, .date-selection-2 {
+					flex: 1;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					height: 50px;
+					font-weight: 400;
+
+					&.active {
+						color: #34b4f5;
+					}
+				}
+
+				.date-selection-2 {
+					position: relative;
+					top: 0;
+					left: 0;
+					right: calc(100% + 50px);
+					width: 100%;
+
+					&.active {
+						right: 0;
+					}
+
+					&::after {
+						content: "";
+						position: absolute;
+						right: inherit;
+						bottom: 0;
+						width: inherit;
+						height: 4px;
+						background: #34b4f5;
+						pointer-events: none;
+						/*transition*/
+						-webkit-transition: all .5s ease;
+						-moz-transition: all .5s ease;
+						-o-transition: all .5s ease;
+						transition: all .5s ease;
+					}
+				}
+
+				.date-selection-1:not(.active) + .arrow + .date-selection-2:not(.active)::after {
+					display: none;
+				}
+
+				.arrow {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					height: 50px;
+					width: 50px;
+				}
+			}
+
+			.day-names {
+				display: flex;
+				align-content: center;
+				justify-content: center;
+				background-color: #f3f4f5;
+				font-weight: 400;
+				color: #293f4d;
+
+				.day-name {
+					flex: 1;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					height: 50px;
+				}
+			}
+		}
+
+		.modal-content {
+			max-height: initial;
+		}
+
+		.modal-body {
+			overflow-y: scroll;
+			padding-bottom: 3rem !important;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
+
+		.modal-footer {
+			position: fixed;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: white;
+		}
+	}
+
+	.month-list {
+		position: relative;
+	}
+
+	.month-list .year:first-child {
+		display: none;
+	}
+
+	.year {
+		margin-top: 15px;
+		padding: 1rem;
+		background: #f3f4f5;
+		font-size: 1.5rem;
+		text-align: center;
+		color: #333;
+	}
+
+	.month-list {
+		position: relative;
+	}
+
+	.month-list .year:first-child {
+		display: none;
+	}
+
+	.year {
+		margin-top: 15px;
+		padding: 1rem;
+		background: #f3f4f5;
+		font-size: 1.5rem;
+		text-align: center;
+		color: #333;
+	}
+
+	.week {
+		display: flex;
+		justify-content: flex-end;
+		width: 100%;
+
+		& .day.is-selected:only-of-type {
+			background-color: #333;
+		}
+
+		&:last-child {
+			justify-content: flex-start;
+		}
+	}
+
+	.month {
+		position: relative;
+
+		.month-name {
+			text-align: center;
+			font-weight: 400;
+			padding-top: 15px;
+			margin-bottom: 5px;
+			color: #333;
+		}
+	}
+
+	.vue-infinite-calendar {
+		position: relative;
+	}
+
+	.calendar-container {
+		position: relative;
+		overflow: scroll;
+		margin: 0 auto;
+		padding-bottom: 5rem;
+		-webkit-overflow-scrolling: touch;
+		box-shadow: inset 0 10px 10px -10px #CCC, inset 0px -10px 10px -10px #CCC;
+	}
+
+	.week-names {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.day-name {
+			flex: 1;
+		}
+	}
+
+	.calendar-header {
+		background-color: white;
+		width: inherit;
+		margin: 0 auto;
+
+		.current-year {
+			font-size: 1.5rem;
+		}
+
+		.today-button {
+			float: right;
+			text-decoration: none;
+		}
+
+		.week-days {
+			width: 100%;
+			margin-bottom: 5px;
+
+			.week-day {
+				display: inline-block;
+				width: 14.28571%;
+				text-align: center;
+			}
+		}
+	}
+
+	.day {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: calc(100vw / 7);
+		width: calc(100vw / 7);
+		font-weight: 400;
+		line-height: 43px;
+		text-align: center;
+		color: #333;
+		cursor: pointer;
+		transition: 0.125s all ease-in-out;
+
+		&:not(.is-between) + .day.is-selected {
+			border-radius: 5px;
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+	}
+
+	/*.day.is-today {*/
+	/*	background-color: blanchedalmond;*/
+	/*}*/
+
+	.day.is-between {
+		background-color: #7dd3ff;
+		color: white;
+
+		& + .day.is-selected {
+			border-radius: 5px;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+
+		}
+	}
+
+	.day.is-selected {
+		border-radius: 5px;
+		background-color: #34b4f5;
+		color: white;
+
+		& + .day.is-selected {
+			border-radius: 5px;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+	}
+
+	.day.is-preselected {
+		border-radius: 5px;
+		background-color: #dddddd;
+	}
+
+	.day.disabled {
+		color: lightgrey;
+	}
+
+	.day.hide {
+		color: transparent;
+	}
+}
