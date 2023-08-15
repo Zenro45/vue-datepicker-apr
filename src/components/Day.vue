@@ -54,6 +54,7 @@
 							// If date 2 is before date 1, set date 1 instead.
 						} else if (this.isSecondDateValid(day)) {
 							this.$root.$emit(this.variable + '_date2', day);
+
 						} else {
 							this.$root.$emit(this.variable + '_clearSelected')
 							this.$root.$emit(this.variable + '_date1', day);
@@ -65,15 +66,15 @@
 				}
 			},
 
-            isSecondDateValid(day) {
-                const date1 = this.$parent.$parent.$parent.$parent.dateISO1;
-
-                if (this.$parent.$parent.$parent.$parent.allowSameDate) {
-                    return (new Date(date1).getTime() <= new Date(day).getTime());
-                }
-
-                return (new Date(date1).getTime() < new Date(day).getTime());
-            },
+			isSecondDateValid(day) {
+				const date1 = this.$parent.$parent.$parent.$parent.dateISO1;
+				
+				if (this.$parent.$parent.$parent.$parent.allowSameDate) {
+					return (new Date(date1).getTime() <= new Date(day).getTime());
+				}
+				
+					return (new Date(date1).getTime() < new Date(day).getTime());
+			},
 
 			isBetweenDates(day = this.day) {
 				if (this.$parent.$parent.$parent.$parent.date1 && this.$parent.$parent.$parent.$parent.date2) {

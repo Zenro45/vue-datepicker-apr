@@ -148,12 +148,12 @@
 					return ''
 				}
 			},
-            allowSameDate: {
-                type: Boolean,
-                default() {
-                    return false
-                }
-            }
+			allowSameDate: {
+				type: Boolean,
+				default() {
+					return false
+				}
+			}
 		},
 		data() {
 			return {
