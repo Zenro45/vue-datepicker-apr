@@ -73,7 +73,7 @@
 					return (new Date(date1).getTime() <= new Date(day).getTime());
 				}
 				
-					return (new Date(date1).getTime() < new Date(day).getTime());
+				return (new Date(date1).getTime() < new Date(day).getTime());
 			},
 
 			isBetweenDates(day = this.day) {
