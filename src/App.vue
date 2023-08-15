@@ -147,6 +147,12 @@
 				default() {
 					return ''
 				}
+			},
+			allowSameDate: {
+				type: Boolean,
+				default() {
+					return false
+				}
 			}
 		},
 		data() {
